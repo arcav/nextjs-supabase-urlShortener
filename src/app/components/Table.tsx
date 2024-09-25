@@ -1,57 +1,64 @@
 // src/app/components/Table.tsx
 import React from 'react';
-
-interface UrlData {
-    id: number;
-    originalUrl: string;
-    shortUrl: string;
-    clickCount: number;
-}
+import { UrlData } from '@/app/page';
 
 interface TableProps {
     urls: UrlData[];
+    handleDelete: (id: number) => Promise<void>;
+    handleUpdate:(id: number) => Promise<void>;
+    openModal: (url: UrlData) => void
 }
 
-const Table: React.FC<TableProps> = ({ urls }) => {
+const Table: React.FC<TableProps> = ({ urls, handleDelete, openModal }) => {
     return (
-        <div className='overflow-x-auto'>
-            <table className='min-w-full divide-y divide-gray-200 text-center'>
-                <thead className='bg-gray-100'>
-                    <tr>
-                        <th className='px-4 py-2 font-semibold text-gray-600'>
-                            ID
-                        </th>
-                        <th className='px-4 py-2 font-semibold text-gray-600'>
-                            URL Original
-                        </th>
-                        <th className='px-4 py-2 font-semibold text-gray-600'>
-                            URL Acortada
-                        </th>
-                        <th className='px-4 py-2 font-semibold text-gray-600'>
-                            Contador de Clics
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {urls.map((url) => (
-                        <tr key={url.id} className='hover:bg-gray-50'>
-                            <td className='px-4 py-2 border-b border-gray-200  text-gray-600'>
-                                {url.id}
-                            </td>
-                            <td className='px-4 py-2 border-b border-gray-200 text-gray-600'>
-                                {url.originalUrl}
-                            </td>
-                            <td className='px-4 py-2 border-b border-gray-200  text-gray-600'>
-                                {url.shortUrl}
-                            </td>
-                            <td className='px-4 py-2 border-b border-gray-200  text-gray-600'>
-                                {url.clickCount}
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
+        <div >
+        <table className='min-w-full divide-y divide-gray-200 text-center'>
+          <thead className='bg-gray-50'>
+            <tr>
+              <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                URL Acortada
+              </th>
+              <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                Clicks
+              </th>
+              <th className='px-6 py-3'></th>
+            </tr>
+          </thead>
+          <tbody className='bg-white divide-y divide-gray-200'>
+            {urls.map((url) => (
+              <tr
+                key={url.id}
+                className='hover:bg-gray-50 transition duration-200 ease-in-out'>
+                <td className='px-6 py-4 whitespace-nowrap'>
+                  <a
+                    href={url.originalUrl}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='text-blue-600 hover:underline'>
+                    {url.shortUrl}
+                  </a>
+                </td>
+                <td className='px-6 py-4 whitespace-nowrap'>
+                  <span className='text-gray-900'>{url.clickCount}</span>
+                </td>
+                <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
+                  <button
+                    onClick={()=>openModal(url)}
+                    className='text-blue-500 hover:text-blue-700 mr-4'>
+                    Modificar
+                  </button>
+                  <button
+                    onClick={() => handleDelete(url.id)}
+                    className='text-red-500 hover:text-red-700'>
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      
     );
 };
 
