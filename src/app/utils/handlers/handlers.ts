@@ -7,7 +7,7 @@ export const handleSubmit = async (
     originalUrl: string,
     setError: (error: string) => void,
     setShortUrl: (url: string) => void,
-    setUrls: React.Dispatch<React.SetStateAction<UrlData[]>>, // Asegúrate de que setUrls acepte el estado anterior
+    setUrls: React.Dispatch<React.SetStateAction<UrlData[]>>, 
     BASE_URL: string
 ) => {
     if (!originalUrl) {
@@ -31,7 +31,7 @@ export const handleSubmit = async (
         }
 
         if (data) {
-            // Ahora esto funcionará correctamente
+            
             setUrls((prevUrls) => [...prevUrls, ...(data as UrlData[])]);
         }
     } catch (error) {
@@ -100,10 +100,8 @@ export const handleIncrement = async (
         // Vuelve a cargar las URLs después de incrementar el contador
         const urls = await fetchUrls();
 
-        // Asegúrate de que urls sea manejado correctamente
         if (urls) {
             console.log('URLs fetched successfully:', urls);
-            // Aquí puedes actualizar el estado o hacer lo que sea necesario con los URLs
         }
     } catch (error) {
         console.error('Error en handleIncrement:', error);
