@@ -45,7 +45,7 @@ const Table: React.FC<TableProps> = ({
                                 className='text-blue-600 hover:text-blue-800 font-semibold block'>
                                 {url.shortUrl}
                             </a>
-                            <span className='absolute top-1 right-1 transform translate-x-1/4 -translate-y-1/4 px-2 py-1 rounded-full text-xs font-semibold bg-red-500 text-white'>
+                            <span className='absolute top-1 right-1 transform translate-x-1/4 -translate-y-1/4 px-2 py-1 rounded-full text-xs font-semibold bg-red-500 text-white lg:-translate-x-3 lg:right-32'>
                                 {url.clickCount}
                             </span>
                         </td>
