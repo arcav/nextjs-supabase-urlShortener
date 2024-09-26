@@ -1,6 +1,6 @@
 import { supabase } from '@/app/lib/supabase';
 
- const fetchUrls = async (): Promise<any[] | undefined> => {
+ const fetchUrls = async (): Promise<any[] | undefined> => { // eslint-disable-next-line  @typescript-eslint/no-explicit-any
     try {
         const { data, error } = await supabase.from('urls').select('*');
         if (error) {
