@@ -24,32 +24,32 @@ const Table: React.FC<TableProps> = ({
     return (
         <table className='min-w-full bg-white divide-y divide-gray-200 shadow-md rounded-lg mt-4 '>
             <thead className='bg-blue-500 text-white tracking-wider'>
-                <tr >                  
-                        <th colSpan={3} className='px-2 py-1 text-center text-xs font-medium uppercase sm:text-sm'>
-                            URL Acortada
-                        </th>
+                <tr>
+                    <th
+                        colSpan={3}
+                        className='px-2 py-1 text-center text-xs font-medium uppercase sm:text-sm '>
+                        URL Acortada
+                    </th>
                 </tr>
             </thead>
             <tbody className='divide-y divide-gray-200'>
                 {urls.map((url) => (
                     <tr
                         key={url.id}
-                        className='hover:bg-gray-100 transition duration-300 ease-in-out'>
-                        <td className='px-1 py-4 text-sm text-left sm:text-left md:text-base whitespace-nowrap break-all'>
+                        className='hover:bg-gray-100 transition duration-300 ease-in-out' >
+                        <td className='px-1 py-1 text-sm text-left sm:text-left md:text-base whitespace-nowrap break-all relative'>
                             <a
                                 href={url.originalUrl}
                                 target='_blank'
                                 rel='noopener noreferrer'
-                                className='text-blue-600 hover:text-blue-800 font-semibold'
-                                onClick={() => handleClick(url.id)}>
+                                className='text-blue-600 hover:text-blue-800 font-semibold block'>
                                 {url.shortUrl}
                             </a>
+                            <span className='absolute top-1 right-1 transform translate-x-1/4 -translate-y-1/4 px-2 py-1 rounded-full text-xs font-semibold bg-red-500 text-white'>
+                                {url.clickCount}
+                            </span>
                         </td>
-                        {/*    <td className="px-1 py-1 text-center">
-                <span className="text-gray-900 font-medium text-sm md:text-base">
-                  {url.clickCount}
-                </span>
-              </td> */}
+
                         <td className='px-1 py-3 text-center flex justify-between'>
                             <MdUpdate
                                 size={26}
