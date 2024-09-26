@@ -42,7 +42,7 @@ export default function Home() {
 
     return (
         <div className='w-full h-screen bg-gray-100 flex flex-col justify-center items-center p-2'>
-            <div className='w-full max-w-4xl md:max-w-lg sm:max-w-sm bg-white rounded-lg shadow-lg p-2 sm:p-2'>
+            <div className='w-full max-w-4xl md:max-w-lg sm:max-w-sm bg-white rounded-lg shadow-lg p-2 sm:p-2 flex flex-col place-content-center'>
                 <h1 className='text-xl sm:text-2xl md:text-3xl font-bold text-blue-600 mb-4 text-center'>
                     Acortador de URLs
                 </h1>
