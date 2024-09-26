@@ -60,6 +60,7 @@ export default function Home() {
                             setShortUrl,
                             setUrls,
                             BASE_URL,
+                            setOriginalUrl
                         );
                     }}
                     originalUrl={originalUrl}
@@ -90,9 +91,7 @@ export default function Home() {
                                 handleUpdate(id, newOriginalUrl, setIsModalOpen)
                             }
                             openModal={(url: UrlData) => openModal(url)}
-                            handleIncrement={(id) =>
-                                handleIncrement(id, fetchUrls)
-                            }
+                              handleIncrement={(id) => handleIncrement(id, setUrls)} 
                         />
                     </div>
                 )}

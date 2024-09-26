@@ -42,7 +42,9 @@ const Table: React.FC<TableProps> = ({
                                 href={url.originalUrl}
                                 target='_blank'
                                 rel='noopener noreferrer'
-                                className='text-blue-600 hover:text-blue-800 font-semibold block'>
+                                className='text-blue-600 hover:text-blue-800 font-semibold block'
+                                onClick={() => handleClick(url.id)}
+                                >
                                 {url.shortUrl}
                             </a>
                             <span className='absolute top-1 right-1 transform translate-x-1/4 -translate-y-1/4 px-2 py-1 rounded-full text-xs font-semibold bg-red-500 text-white lg:-translate-x-3 lg:right-32'>

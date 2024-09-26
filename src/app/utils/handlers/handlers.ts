@@ -3,12 +3,12 @@ import { supabase } from '@/app/lib/supabase';
 import {UrlData} from '@/app/types/urlData'
 
 export const handleSubmit = async (
-   
     originalUrl: string,
     setError: (error: string) => void,
     setShortUrl: (url: string) => void,
     setUrls: React.Dispatch<React.SetStateAction<UrlData[]>>, 
-    BASE_URL: string
+    BASE_URL: string,
+    setOriginalUrl: (url: string) => void // Añadimos esta función
 ) => {
     if (!originalUrl) {
         setError('Por favor, ingrese una URL válida.');
@@ -31,8 +31,10 @@ export const handleSubmit = async (
         }
 
         if (data) {
-            
             setUrls((prevUrls) => [...prevUrls, ...(data as UrlData[])]);
+
+            // Limpiar el input originalUrl
+            setOriginalUrl(''); // Aquí limpiamos el campo de entrada
         }
     } catch (error) {
         console.error('Error en handleSubmit:', error);
@@ -83,28 +85,47 @@ export const handleUpdate = async (
 // Función para manejar el incremento de clickCount
 export const handleIncrement = async (
     id: number,
-    fetchUrls: () => Promise<any[] | undefined>
+    setUrls: React.Dispatch<React.SetStateAction<UrlData[]>>, // Añade setUrls aquí
 ): Promise<void> => {
     try {
-        // Lógica de incremento del contador
-        const { error } = await supabase
+        // Primero, obtenemos el valor actual de clickCount
+        const { data, error: fetchError } = await supabase
             .from('urls')
-            .update({ clickCount: supabase.rpc('clickCount + 1') })
-            .eq('id', id);
+            .select('clickCount')
+            .eq('id', id)
+            .single();
 
-        if (error) {
-            console.error('Error incrementando el contador:', error);
+        if (fetchError) {
+            console.error('Error obteniendo el contador:', fetchError);
             return;
         }
 
-        // Vuelve a cargar las URLs después de incrementar el contador
-        const urls = await fetchUrls();
+        // Incrementamos el valor de clickCount si lo obtenemos correctamente
+        if (data && data.clickCount !== undefined) {
+            const newClickCount = data.clickCount + 1;
 
-        if (urls) {
-            console.log('URLs fetched successfully:', urls);
+            // Actualizamos el valor de clickCount en la base de datos
+            const { error: updateError } = await supabase
+                .from('urls')
+                .update({ clickCount: newClickCount })
+                .eq('id', id);
+
+            if (updateError) {
+                console.error('Error incrementando el contador:', updateError);
+                return;
+            }
+
+            // Actualizamos el estado local de las URLs
+            setUrls((prevUrls) =>
+                prevUrls.map((url) =>
+                    url.id === id ? { ...url, clickCount: newClickCount } : url
+                )
+            );
         }
     } catch (error) {
         console.error('Error en handleIncrement:', error);
     }
 };
+
+
 
