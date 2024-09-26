@@ -11,7 +11,7 @@ interface FormProps {
 
 const Form: React.FC<FormProps> = ({ handleSubmit, originalUrl, setOriginalUrl, error }) => {
     return (
-        <form onSubmit={handleSubmit} className='flex flex-col space-y-4 p-2'>
+        <form onSubmit={handleSubmit} className='flex flex-col place-items-center space-y-4 p-2'>
             <input
                 type="text"
                 value={originalUrl}
@@ -19,7 +19,7 @@ const Form: React.FC<FormProps> = ({ handleSubmit, originalUrl, setOriginalUrl, 
                 onInvalid={(e) => (e.target as HTMLInputElement).setCustomValidity('Por favor, ingrese una URL válida.')}
                 onInput={(e) => (e.target as HTMLInputElement).setCustomValidity('')}
                 placeholder="Ingrese la URL original"
-                className='w-full p-2 border rounded lg:w-1/2'
+                className='w-full p-2 border rounded lg:w-1/2 flex justify-center'
                 required 
             />
             {error && <p className='text-black'>{error}</p>}
