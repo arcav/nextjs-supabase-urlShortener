@@ -41,9 +41,9 @@ export default function Home() {
     const closeModal = () => setIsModalOpen(false);
 
     return (
-        <div className='w-full h-screen bg-gray-100 flex flex-col justify-center items-center p-4'>
-            <div className='w-full max-w-4xl bg-white rounded-lg shadow-lg p-6 lg:p-8'>
-                <h1 className='text-3xl font-bold text-blue-600 mb-4'>
+        <div className='w-full h-screen bg-gray-100 flex flex-col justify-center items-center p-2'>
+            <div className='w-full max-w-4xl md:max-w-lg sm:max-w-sm bg-white rounded-lg shadow-lg p-2 sm:p-2'>
+                <h1 className='text-xl sm:text-2xl md:text-3xl font-bold text-blue-600 mb-4 text-center'>
                     Acortador de URLs
                 </h1>
                 <Form
@@ -69,7 +69,7 @@ export default function Home() {
                   
                 />
                 {shortUrl && (
-                    <p className='mt-2 text-black'>
+                    <p className='mt-2 text-black break-all'>
                         URL acortada:{' '}
                         <a href={shortUrl} className='underline'>
                             {shortUrl}
@@ -79,7 +79,7 @@ export default function Home() {
                 <Button
                     label={showTable ? 'Ocultar Tabla' : 'Mostrar Tabla'}
                     onClick={() => setShowTable((prevState) => !prevState)}
-                    className='m-4 p-2 bg-blue-500 text-white rounded items-center'
+                    className='mt-4 p-2 bg-blue-500 text-white rounded w-full sm:w-auto'
                 />
                 {showTable && (
                     <div className='overflow-x-auto'>

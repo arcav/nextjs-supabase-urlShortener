@@ -11,7 +11,7 @@ interface FormProps {
 
 const Form: React.FC<FormProps> = ({ handleSubmit, originalUrl, setOriginalUrl, error }) => {
     return (
-        <form onSubmit={handleSubmit} className='flex flex-col space-y-4'>
+        <form onSubmit={handleSubmit} className='flex flex-col space-y-4 p-2'>
             <input
                 type="text"
                 value={originalUrl}
